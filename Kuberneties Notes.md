@@ -1193,7 +1193,18 @@ kubectl get externalsecret -n webapps
 
 kubectl get secret bankapp-db-secret -n webapps
 ```
+```
+Important RDS + Kubernetes Troubleshooting Points
+1. Access Denied: Access denied for user usually indicates incorrect username/password or MySQL user permissions.
 
+2. RDS Master User: The RDS master username (e.g. admin) is not necessarily root. Use its actual username and password.
+
+3. Dedicated DB User: Create a separate application user (e.g. bankapp_user) instead of using the RDS master user in application Pods.
+
+4. Init Container: Use an init container to create the initial database and application user, then grant permissions on that database.
+
+5. Secret Mapping: Ensure AWS Secrets Manager properties correctly map to Kubernetes Secret keys. If credentials change, update the MySQL user password and restart the Deployment to refresh environment variables.
+```
 ---
 
 # End of Kubernetes Notes
