@@ -937,6 +937,20 @@ kubectl get ing
 
 # 10. AWS Secrets Manager for Storing and Managing DB/App Secrets
 
+## Flow
+```
+AWS Secrets Manager: stores credentials.
+
+EKS Pod Identity: provides secure AWS authentication.
+
+External Secrets Operator (ESO): retrieves credentials from AWS.
+
+Kubernetes Secret: makes credentials available to your application.
+
+Deployment: consumes credentials using envFrom.
+
+```
+
 ## What to Do
 
 1. Create MySQL credentials in AWS Secrets Manager.
